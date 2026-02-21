@@ -1,0 +1,97 @@
+{
+  "gateway": {
+    "mode": "local",
+    "port": 18789,
+    "bind": "lan",
+    "auth": {
+      "mode": "token",
+      "token": "f731a4b2b1ec84f3c532344d20ffbce97053cc95bae44731af66542ddaf9809d"
+    },
+    "controlUi": {
+      "enabled": true,
+      "allowInsecureAuth": true
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "emergent-gpt": {
+        "baseUrl": "https://integrations.emergentagent.com/llm/",
+        "apiKey": "sk-emergent-71636Cb0d47424fB7B",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "gpt-5.2",
+            "name": "GPT-5.2",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 1.75e-06,
+              "output": 1.4e-05,
+              "cacheRead": 1.75e-07,
+              "cacheWrite": 1.75e-06
+            },
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          }
+        ]
+      },
+      "emergent-claude": {
+        "baseUrl": "https://integrations.emergentagent.com/llm",
+        "apiKey": "sk-emergent-71636Cb0d47424fB7B",
+        "api": "anthropic-messages",
+        "authHeader": true,
+        "models": [
+          {
+            "id": "claude-sonnet-4-5",
+            "name": "Claude Sonnet 4.5",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 3e-06,
+              "output": 1.5e-05,
+              "cacheRead": 3e-07,
+              "cacheWrite": 3.75e-06
+            },
+            "contextWindow": 200000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "claude-opus-4-5",
+            "name": "Claude Opus 4.5",
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 5e-06,
+              "output": 2.5e-05,
+              "cacheRead": 5e-07,
+              "cacheWrite": 6.25e-06
+            },
+            "contextWindow": 200000,
+            "maxTokens": 64000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/root/clawd",
+      "models": {
+        "emergent-gpt/gpt-5.2": {
+          "alias": "gpt-5.2"
+        },
+        "emergent-claude/claude-sonnet-4-5": {
+          "alias": "sonnet"
+        }
+      },
+      "model": {
+        "primary": "emergent-claude/claude-sonnet-4-5"
+      }
+    }
+  }
+}
